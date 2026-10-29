@@ -8744,13 +8744,26 @@
   "keyakinan": "",
   "alasan": "sweep Monday High lalu reclaim, Wolf: breakout trendline gagal",
   "alert": "FOMC hari ini atau besok: berita memicu noise. Eliz tetap hanya trading bila ada trigger jelas.",
-  "hasil": "menunggu",
-  "R": "",
+  "hasil": "TP",
+  "R": 2,
   "engine": "0537067ed55fc5be",
   "fwd": 1,
   "seq": 271,
   "prev": "b11a34b040d9a362c846",
-  "h": "686e3463eb023d41de2a"
+  "h": "686e3463eb023d41de2a",
+  "tx": 1793235600000,
+  "bm": {
+   "e": 0.208,
+   "h": "TP",
+   "R": 2,
+   "tx": 1793196000000
+  },
+  "bi": {
+   "e": 0.208,
+   "h": "SL",
+   "R": -1,
+   "tx": 1793188800000
+  }
  },
  {
   "id": "2026-10-28|Aturan Eliz|CRCLB",
@@ -8826,13 +8839,14 @@
   "keyakinan": "",
   "alasan": "sweep Monday Low lalu reclaim, OBV divergence",
   "alert": "FOMC hari ini atau besok: berita memicu noise. Eliz tetap hanya trading bila ada trigger jelas.",
-  "hasil": "menunggu",
-  "R": "",
+  "hasil": "SL",
+  "R": -1,
   "engine": "0537067ed55fc5be",
   "fwd": 1,
   "seq": 274,
   "prev": "6edcdd23b6c53edf55c4",
-  "h": "735a587c6a7d07729be9"
+  "h": "735a587c6a7d07729be9",
+  "tx": 1793239200000
  },
  {
   "id": "2026-10-28|Aturan Eliz|HUMA",
@@ -9657,13 +9671,14 @@
   "keyakinan": "",
   "alasan": "sweep Monday Low lalu reclaim",
   "alert": "",
-  "hasil": "menunggu",
-  "R": "",
+  "hasil": "SL",
+  "R": -1,
   "engine": "0537067ed55fc5be",
   "fwd": 1,
   "seq": 309,
   "prev": "c08e447cad839fdf7380",
-  "h": "936114b2ddd7468a176d"
+  "h": "936114b2ddd7468a176d",
+  "tx": 1793239200000
  },
  {
   "id": "2026-10-29|Aturan Eliz|MSTRB",
