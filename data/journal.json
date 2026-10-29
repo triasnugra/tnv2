@@ -8863,13 +8863,14 @@
   "keyakinan": "",
   "alasan": "sweep Monday High lalu reclaim, Wolf: breakout trendline gagal",
   "alert": "FOMC hari ini atau besok: berita memicu noise. Eliz tetap hanya trading bila ada trigger jelas.",
-  "hasil": "menunggu",
-  "R": "",
+  "hasil": "SL",
+  "R": -1,
   "engine": "0537067ed55fc5be",
   "fwd": 1,
   "seq": 275,
   "prev": "735a587c6a7d07729be9",
-  "h": "ab3aa40e58eb41f4f0d9"
+  "h": "ab3aa40e58eb41f4f0d9",
+  "tx": 1793257200000
  },
  {
   "id": "2026-10-28|Aturan Eliz|TAO",
