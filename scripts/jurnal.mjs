@@ -1,0 +1,122 @@
+import fs from 'node:fs';
+import {bj,kl,NOT,feat,alertList,scanInput} from '../core.mjs';
+import {gradeTrade,mapK} from '../trade-sim.mjs';
+import {engineHash,sealRow,lastSealed,ensureProtocol,RES,PROTOCOL_FILE_V2} from '../forward-lib.mjs';
+import {CFG,HIPOTESIS,evaluate,selectDaily,validateSymbol} from '../gate.mjs';
+const DAY=864e5,H1=36e5,sleep=ms=>new Promise(r=>setTimeout(r,ms));
+const F='data/journal.json'
+// Forward test: versi mesin dikunci lewat hash core.mjs + trade-sim.mjs. Mengubah salah satunya = mesin baru.
+const ENGINE=engineHash(fs.readFileSync(new URL('../core.mjs',import.meta.url),'utf8'),fs.readFileSync(new URL('../trade-sim.mjs',import.meta.url),'utf8'));
+// Mesin v2 = mesin v1 + gerbang kualitas (gate.mjs). Hash-nya mencakup gate.mjs dan seluruh CFG-nya.
+const GATE_SRC=fs.readFileSync(new URL('../gate.mjs',import.meta.url),'utf8');
+const ENGINE_V2=engineHash(fs.readFileSync(new URL('../core.mjs',import.meta.url),'utf8'),fs.readFileSync(new URL('../trade-sim.mjs',import.meta.url),'utf8'),GATE_SRC,JSON.stringify(CFG));
+const AG1='Aturan Eliz',AG2='Eliz v2';
+const alerts=()=>alertList().map(a=>a[1]).join('; ');
+
+const ELIZ=`Terapkan metode CryptoEliz:
+- Ikuti tren; tren naik cari long, jangan short tanpa deviasi. BTC adalah gerbang: long altcoin saat BTC turun dihindari.
+- Hanya trading di range high/low, hindari mid-range.
+- Entry limit di retest setelah breakout ber-close, atau setelah deviasi (harga tembus level lalu kembali).
+- Fib 0.75 zona koreksi; OBV dan RSI divergence sebagai konfirmasi.
+- SL ketat (scalping 3-5%, swing 10-15%); tolak setup yang butuh SL lebih lebar.
+- Saat ragu atau ada alert, NO_TRADE.`;
+const prompt=(b,al,mode)=>`Kamu analis crypto. Hari ini ${new Date().toISOString().slice(0,10)} UTC. Alert aktif: ${al||'tidak ada'}.
+Data harian (sudah dihitung; jangan mengarang angka lain):
+${JSON.stringify(b)}
+Beri rencana trading horizon 7 hari per aset. entry = harga limit. Jika tidak ada setup jelas, ada alert aktif, atau data kurang, jawab NO_TRADE. Jarak SL maks 15% dari entry.
+Jawab HANYA JSON: {"hasil":[{"aset":"BTC","arah":"LONG|SHORT|NO_TRADE","entry":0,"sl":0,"tp":0,"keyakinan":0,"alasan":"maks 20 kata"}]}`+(mode=='eliz'?'\n\n'+ELIZ:'');
+
+async function post(url,body,headers){const r=await fetch(url,{method:'POST',headers:{'Content-Type':'application/json',...headers},body:JSON.stringify(body),signal:AbortSignal.timeout(90000)});
+ if(!r.ok)throw new Error('HTTP '+r.status+' '+(await r.text()).slice(0,150));return r.json()}
+const oai=(url,def,env,json)=>async(k,p)=>(await post(url,{model:process.env[env]||def,temperature:0,messages:[{role:'user',content:p}],...(json?{response_format:{type:'json_object'}}:{})},{Authorization:'Bearer '+k})).choices[0].message.content;
+const AI={
+ Gemini:{key:'GEMINI_API_KEY',run:async(k,p)=>(await post(`https://generativelanguage.googleapis.com/v1beta/models/${process.env.GEMINI_MODEL||'gemini-2.5-flash'}:generateContent`,{contents:[{parts:[{text:p}]}],generationConfig:{temperature:0,responseMimeType:'application/json'}},{'x-goog-api-key':k})).candidates[0].content.parts[0].text},
+ Groq:{key:'GROQ_API_KEY',run:oai('https://api.groq.com/openai/v1/chat/completions','llama-3.3-70b-versatile','GROQ_MODEL',true)},
+ OpenRouter:{key:'OPENROUTER_API_KEY',run:oai('https://openrouter.ai/api/v1/chat/completions','meta-llama/llama-3.3-70b-instruct:free','OPENROUTER_MODEL',false)},
+ Perplexity:{key:'PERPLEXITY_API_KEY',run:oai('https://api.perplexity.ai/chat/completions','sonar','PERPLEXITY_MODEL',false)}};
+
+const rows=fs.existsSync(F)?JSON.parse(fs.readFileSync(F,'utf8')):[];
+const ids=new Set(rows.map(r=>r.id)),today=new Date().toISOString().slice(0,10);
+const PROTO=ensureProtocol(ENGINE);
+const PROTO2=ensureProtocol(ENGINE_V2,PROTOCOL_FILE_V2,Date.now(),{agen:AG2,versi:2,files:['core.mjs','trade-sim.mjs','gate.mjs'],hipotesis:HIPOTESIS,cfg:CFG});
+if(PROTO2.created)console.log('Protokol forward test v2 DIMULAI',PROTO2.mulai,'mesin',ENGINE_V2);
+else if(PROTO2.engine!==ENGINE_V2)console.log('PERINGATAN: mesin v2 berubah (hash '+ENGINE_V2+', protokol '+PROTO2.engine+'). Baris v2 baru TIDAK dihitung sampai protokol v2 baru dimulai (hapus data/forward-protocol-v2.json).');
+if(PROTO.created)console.log('Protokol forward test DIMULAI',PROTO.mulai,'mesin',ENGINE);
+else if(PROTO.engine!==ENGINE)console.log('PERINGATAN: mesin berubah (hash '+ENGINE+', protokol '+PROTO.engine+'). Baris baru TIDAK dihitung di forward test sampai protokol baru dimulai (hapus data/forward-protocol.json).');
+const q=v=>+Number(v).toPrecision(5);
+const GL='data/gate-log.json',gateLog=fs.existsSync(GL)?JSON.parse(fs.readFileSync(GL,'utf8')):[],glIds=new Set(gateLog.map(x=>x.id));
+const logGate=(e)=>{if(glIds.has(e.id))return;glIds.add(e.id);gateLog.push(e)};
+function addRow(agen,aset,o,px,al,eng=ENGINE){
+ const bad=validateSymbol(aset);if(bad){logGate({id:`${today}|${agen}|${aset||'?'}`,d:today,aset:aset||'',agen,v2:'TOLAK',alasan:[bad]});return}
+ const id=`${today}|${agen}|${aset}`;if(ids.has(id))return;ids.add(id);
+ const arah=String(o.arah||'').toUpperCase(),t=Date.now(),entry=+o.entry,sl=+o.sl,tp=+o.tp;
+ const row={id,waktu:new Date(t).toISOString().slice(0,16).replace('T',' ')+' UTC',t,due:t+7*DAY,agen,aset,arah,entry:'',sl:'',tp:'',harga_awal:px,keyakinan:o.keyakinan??'',alasan:String(o.alasan||'').slice(0,160),alert:al,hasil:'menunggu',R:''};
+ if(arah==='NO_TRADE'){row.hasil='NO_TRADE'}
+ else if(arah!=='LONG'&&arah!=='SHORT'||![entry,sl,tp].every(Number.isFinite)){row.arah=arah||'?';row.hasil='tidak valid'}
+ else{Object.assign(row,{entry:q(entry),sl:q(sl),tp:q(tp)});const s=arah==='LONG'?1:-1;
+  if(!(s*(entry-sl)>0&&s*(tp-entry)>0)||Math.abs(entry-sl)/entry>.15)row.hasil='tidak valid'}
+ row.engine=eng;sealRow(row,lastSealed(rows));
+ rows.push(row)}
+// Penilaian memakai aturan bersama di trade-sim.mjs (sama persis dengan backtester):
+// candle pengisi dicek SL, urutan SL/TP dalam candle 1H yang ambigu diputuskan lewat data 1 menit.
+async function grade(r){
+ const sym=r.aset+'USDT',t0=Math.floor(r.t/H1)*H1,now=Date.now();
+ const g=await gradeTrade(r,{now,
+  h1:async()=>(await bj(`klines?symbol=${sym}&interval=1h&startTime=${t0}&limit=1000`)).map(mapK),
+  m1:async(a,b)=>(await bj(`klines?symbol=${sym}&interval=1m&startTime=${a}&endTime=${b}&limit=1000`)).map(mapK)});
+ if(g){r.hasil=g.hasil;r.R=+g.R.toFixed(2);r.tx=g.t}}
+
+// Baseline forward: entry MARKET di menit pertama setelah sinyal (arah sama) dan MIRROR (arah dibalik), jarak risiko
+// sama dan TP 2R. Dinilai dengan aturan yang sama. Pembanding wajib: tanpa ini tidak bisa dibedakan edge dari kebetulan.
+async function gradeBase(r){
+ const sym=r.aset+'USDT',s=r.arah==='LONG'?1:-1,risk=Math.abs(r.entry-r.sl),now=Date.now(),t0=Math.floor(r.t/H1)*H1;
+ const m0=(await bj(`klines?symbol=${sym}&interval=1m&startTime=${r.t}&limit=1`)).map(mapK)[0];if(!m0)return;
+ const e=m0.o,src={now,
+  h1:async()=>(await bj(`klines?symbol=${sym}&interval=1h&startTime=${t0}&limit=1000`)).map(mapK),
+  m1:async(a,b)=>(await bj(`klines?symbol=${sym}&interval=1m&startTime=${a}&endTime=${b}&limit=1000`)).map(mapK)};
+ const one=async d=>{const sd=d*s;return gradeTrade({arah:sd==1?'LONG':'SHORT',entry:e,sl:e-sd*risk,tp:e+sd*2*risk,t:r.t,due:r.due},src)};
+ const a=await one(1),b=await one(-1);
+ if(a&&b){r.bm={e,h:a.hasil,R:+a.R.toFixed(3),tx:a.t};r.bi={e,h:b.hasil,R:+b.R.toFixed(3),tx:b.t}}}
+
+// 1) nilai prediksi lama
+for(const r of rows.filter(r=>r.hasil==='menunggu')){try{await grade(r)}catch(e){console.log('nilai gagal',r.id,e.message)}}
+for(const r of rows.filter(r=>r.fwd&&(r.agen===PROTO.agen||r.agen===PROTO2.agen)&&RES(r.hasil)&&!r.bm&&(r.arah==='LONG'||r.arah==='SHORT')&&Number.isFinite(+r.entry))){try{await gradeBase(r)}catch(e){console.log('baseline gagal',r.id,e.message)}}
+
+// 2) prediksi baru (sekali sehari, setelah candle harian tutup)
+const hr=new Date().getUTCHours();
+if(process.env.FORCE||(hr>=1&&hr<=5)){
+ const t=await bj('ticker/24hr');
+ const top=t.filter(x=>x.symbol.endsWith('USDT')&&!NOT.test(x.symbol.slice(0,-4))).sort((a,b)=>b.quoteVolume-a.quoteVolume).slice(0,40);
+ const F40=[];
+ for(let i=0;i<top.length;i+=8)await Promise.all(top.slice(i,i+8).map(async x=>{try{const sc=scanInput(await kl(x.symbol));F40.push({s:x.symbol.slice(0,-4),...feat(sc.bars,sc.qv)})}catch(e){}}));
+ const btc=F40.find(f=>f.s==='BTC'),sig=F40.filter(f=>f.side&&f.slp<=15).sort((a,b)=>b.why.length-a.why.length);
+ const al=alerts(),cand=[...(btc?[btc]:[]),...sig.filter(f=>f.s!=='BTC').slice(0,5)];
+ for(const f of sig)addRow(AG1,f.s,{arah:f.side==1?'LONG':'SHORT',entry:f.entry,sl:f.sl,tp:f.tp,alasan:f.why.join(', ')},f.px,al);
+ // Mesin v2: setiap kandidat v1 dievaluasi gerbang kualitas. Yang lolos dicatat sebagai agen 'Eliz v2';
+ // yang ditolak tetap ada di jurnal v1 (dinilai juga), dan alasan penolakannya dicatat di data/gate-log.json
+ // supaya terukur apakah gerbang menolak yang memang lebih sering rugi.
+ {const ctx={btc},ev=sig.map(f=>({f,g:evaluate(f,ctx)})),lolos=ev.filter(x=>x.g.ok);
+  const have=rows.filter(r=>r.id.startsWith(`${today}|${AG2}|`)),already={total:have.length,long:have.filter(r=>r.arah==='LONG').length,short:have.filter(r=>r.arah==='SHORT').length};
+  const {keep,drop}=selectDaily(lolos,already);
+  for(const x of ev.filter(x=>!x.g.ok))logGate({id:`${today}|${AG1}|${x.f.s}`,d:today,aset:x.f.s,arah:x.f.side==1?'LONG':'SHORT',v2:'TOLAK',alasan:x.g.reasons,skor:x.g.score});
+  for(const d of drop)logGate({id:`${today}|${AG1}|${d.item.f.s}`,d:today,aset:d.item.f.s,arah:d.item.f.side==1?'LONG':'SHORT',v2:'TOLAK',alasan:[d.reason],skor:d.item.g.score});
+  for(const x of keep){const f=x.f;logGate({id:`${today}|${AG1}|${f.s}`,d:today,aset:f.s,arah:f.side==1?'LONG':'SHORT',v2:'LOLOS',alasan:[],skor:x.g.score});
+   addRow(AG2,f.s,{arah:f.side==1?'LONG':'SHORT',entry:f.entry,sl:f.sl,tp:f.tp,alasan:f.why.join(', ')},f.px,al,ENGINE_V2)}
+  console.log('gerbang v2:',ev.length,'kandidat,',keep.length,'lolos,',ev.length-keep.length,'ditolak')}
+ const bundle=cand.map(f=>({aset:f.s,harga:q(f.px),tren_harian:['turun','netral','naik'][f.tr+1],btc_tren:['turun','netral','naik'][(btc?.tr??0)+1],ema20:q(f.e20),ema50:q(f.e50),rsi14:Math.round(f.rsi),obv_divergence:f.obvDiv,rsi_divergence:f.rsiDiv,range60d_high:q(f.H),range60d_low:q(f.L),posisi_range_pct:Math.round(f.pos*100),fib075:q(f.f75),deviasi_bawah_5h:f.devUp,deviasi_atas_5h:f.devDn,volume24h_usd:Math.round(f.qv)}));
+ const px=Object.fromEntries(cand.map(f=>[f.s,f.px]));
+ if(process.env.USE_AI&&bundle.length)for(const[n,a]of Object.entries(AI)){const key=process.env[a.key];if(!key)continue;
+  for(const mode of['polos','eliz']){
+   try{const txt=await a.run(key,prompt(bundle,al,mode));const j=JSON.parse(txt.slice(txt.indexOf('{'),txt.lastIndexOf('}')+1));
+    for(const o of j.hasil||[]){const as=String(o.aset||'').toUpperCase();if(px[as])addRow(`${n} (${mode})`,as,o,px[as],al)}
+    console.log(n,mode,'ok')}catch(e){console.log(n,mode,'gagal:',e.message)}
+   await sleep(2500)}}
+}
+fs.mkdirSync('data',{recursive:true});
+fs.writeFileSync(F,JSON.stringify(rows,null,1));
+fs.writeFileSync(GL,JSON.stringify(gateLog,null,1));
+try{const g=(await (await fetch('https://api.coingecko.com/api/v3/global',{signal:AbortSignal.timeout(15000)})).json()).data.market_cap_percentage;
+ const DF='data/dominance.json',D=fs.existsSync(DF)?JSON.parse(fs.readFileSync(DF,'utf8')):[];
+ if(!D.some(x=>x.d===today)){D.push({d:today,btc:+g.btc.toFixed(2),eth:+g.eth.toFixed(2)});fs.writeFileSync(DF,JSON.stringify(D.slice(-400)))}}
+catch(e){console.log('dominasi gagal:',e.message)}
+console.log('baris:',rows.length);
