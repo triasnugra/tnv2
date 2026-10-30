@@ -11560,13 +11560,26 @@
   "keyakinan": "",
   "alasan": "sweep Monday High lalu reclaim",
   "alert": "",
-  "hasil": "menunggu",
-  "R": "",
+  "hasil": "TP",
+  "R": 2,
   "engine": "0537067ed55fc5be",
   "fwd": 1,
   "seq": 347,
   "prev": "cea82f827d8105ec0e45",
-  "h": "08f45a0e9b49ec5fb662"
+  "h": "08f45a0e9b49ec5fb662",
+  "tx": 1793383200000,
+  "bm": {
+   "e": 1.531,
+   "h": "SL",
+   "R": -1,
+   "tx": 1793332800000
+  },
+  "bi": {
+   "e": 1.531,
+   "h": "TP",
+   "R": 2,
+   "tx": 1793332800000
+  }
  },
  {
   "id": "2026-10-30|Eliz v2|SNDKB",
