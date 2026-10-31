@@ -1,8 +1,8 @@
 # Forward test CryptoEliz (Eliz v2)
 
 - Mulai: 2026-10-29T01:19:08.176Z | agen: Eliz v2 | mesin terkunci: cdaa11430a4b55e8
-- Integritas jurnal: OK (348 baris tersegel, ujung rantai 6360b54c327fe6743efe)
-- Tercatat sesuai protokol: 3 (selesai 2, menunggu 1, dilewati dedupe 0)
+- Integritas jurnal: OK (382 baris tersegel, ujung rantai d5d0b2e3f7f5acd9389e)
+- Tercatat sesuai protokol: 5 (selesai 2, menunggu 3, dilewati dedupe 0)
 
 ## Kemajuan menuju evaluasi
 
