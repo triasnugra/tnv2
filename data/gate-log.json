@@ -1411,5 +1411,30 @@
    "MELAWAN_BTC"
   ],
   "skor": 1
+ },
+ {
+  "id": "2026-11-02|Aturan Eliz|SPCXB",
+  "d": "2026-11-02",
+  "aset": "SPCXB",
+  "arah": "SHORT",
+  "v2": "TOLAK",
+  "alasan": [
+   "VOLUME_TIPIS",
+   "ENTRY_TERLALU_JAUH",
+   "SETUP_BASI_TP_SUDAH_TERSENTUH",
+   "TRIGGER_BASI"
+  ],
+  "skor": 3
+ },
+ {
+  "id": "2026-11-02|Aturan Eliz|CRCLB",
+  "d": "2026-11-02",
+  "aset": "CRCLB",
+  "arah": "SHORT",
+  "v2": "TOLAK",
+  "alasan": [
+   "VOLUME_TIPIS"
+  ],
+  "skor": 2
  }
 ]
