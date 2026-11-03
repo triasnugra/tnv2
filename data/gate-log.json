@@ -1436,5 +1436,185 @@
    "VOLUME_TIPIS"
   ],
   "skor": 2
+ },
+ {
+  "id": "2026-11-03|Aturan Eliz|TRX",
+  "d": "2026-11-03",
+  "aset": "TRX",
+  "arah": "SHORT",
+  "v2": "TOLAK",
+  "alasan": [
+   "ENTRY_TERLALU_JAUH",
+   "SETUP_BASI_TP_SUDAH_TERSENTUH",
+   "TRIGGER_BASI"
+  ],
+  "skor": 3
+ },
+ {
+  "id": "2026-11-03|Aturan Eliz|ADA",
+  "d": "2026-11-03",
+  "aset": "ADA",
+  "arah": "SHORT",
+  "v2": "TOLAK",
+  "alasan": [
+   "VOLUME_TIPIS"
+  ],
+  "skor": 3
+ },
+ {
+  "id": "2026-11-03|Aturan Eliz|TRUMP",
+  "d": "2026-11-03",
+  "aset": "TRUMP",
+  "arah": "SHORT",
+  "v2": "TOLAK",
+  "alasan": [
+   "VOLUME_TIPIS"
+  ],
+  "skor": 3
+ },
+ {
+  "id": "2026-11-03|Aturan Eliz|SOL",
+  "d": "2026-11-03",
+  "aset": "SOL",
+  "arah": "SHORT",
+  "v2": "TOLAK",
+  "alasan": [
+   "ENTRY_TERLALU_JAUH"
+  ],
+  "skor": 2
+ },
+ {
+  "id": "2026-11-03|Aturan Eliz|PEPE",
+  "d": "2026-11-03",
+  "aset": "PEPE",
+  "arah": "SHORT",
+  "v2": "TOLAK",
+  "alasan": [
+   "ENTRY_TERLALU_JAUH",
+   "SETUP_BASI_TP_SUDAH_TERSENTUH"
+  ],
+  "skor": 2
+ },
+ {
+  "id": "2026-11-03|Aturan Eliz|XAUT",
+  "d": "2026-11-03",
+  "aset": "XAUT",
+  "arah": "SHORT",
+  "v2": "TOLAK",
+  "alasan": [
+   "VOLUME_TIPIS"
+  ],
+  "skor": 2
+ },
+ {
+  "id": "2026-11-03|Aturan Eliz|LINK",
+  "d": "2026-11-03",
+  "aset": "LINK",
+  "arah": "SHORT",
+  "v2": "TOLAK",
+  "alasan": [
+   "ENTRY_TERLALU_JAUH",
+   "SETUP_BASI_TP_SUDAH_TERSENTUH"
+  ],
+  "skor": 2
+ },
+ {
+  "id": "2026-11-03|Aturan Eliz|NVDAB",
+  "d": "2026-11-03",
+  "aset": "NVDAB",
+  "arah": "SHORT",
+  "v2": "TOLAK",
+  "alasan": [
+   "VOLUME_TIPIS"
+  ],
+  "skor": 2
+ },
+ {
+  "id": "2026-11-03|Aturan Eliz|XPL",
+  "d": "2026-11-03",
+  "aset": "XPL",
+  "arah": "SHORT",
+  "v2": "TOLAK",
+  "alasan": [
+   "VOLUME_TIPIS",
+   "ENTRY_TERLALU_JAUH",
+   "SETUP_BASI_TP_SUDAH_TERSENTUH"
+  ],
+  "skor": 2
+ },
+ {
+  "id": "2026-11-03|Aturan Eliz|AVAX",
+  "d": "2026-11-03",
+  "aset": "AVAX",
+  "arah": "SHORT",
+  "v2": "TOLAK",
+  "alasan": [
+   "VOLUME_TIPIS"
+  ],
+  "skor": 2
+ },
+ {
+  "id": "2026-11-03|Aturan Eliz|CELO",
+  "d": "2026-11-03",
+  "aset": "CELO",
+  "arah": "SHORT",
+  "v2": "TOLAK",
+  "alasan": [
+   "VOLUME_TIPIS",
+   "ENTRY_TERLALU_JAUH",
+   "SETUP_BASI_TP_SUDAH_TERSENTUH"
+  ],
+  "skor": 2
+ },
+ {
+  "id": "2026-11-03|Aturan Eliz|TAO",
+  "d": "2026-11-03",
+  "aset": "TAO",
+  "arah": "SHORT",
+  "v2": "TOLAK",
+  "alasan": [
+   "VOLUME_TIPIS",
+   "ENTRY_TERLALU_JAUH"
+  ],
+  "skor": 2
+ },
+ {
+  "id": "2026-11-03|Aturan Eliz|XRP",
+  "d": "2026-11-03",
+  "aset": "XRP",
+  "arah": "LONG",
+  "v2": "TOLAK",
+  "alasan": [
+   "MELAWAN_TREN_TANPA_KONFLUENSI",
+   "MELAWAN_BTC"
+  ],
+  "skor": 1
+ },
+ {
+  "id": "2026-11-03|Aturan Eliz|ETH",
+  "d": "2026-11-03",
+  "aset": "ETH",
+  "arah": "SHORT",
+  "v2": "LOLOS",
+  "alasan": [],
+  "skor": 3
+ },
+ {
+  "id": "2026-11-03|Aturan Eliz|SPCXB",
+  "d": "2026-11-03",
+  "aset": "SPCXB",
+  "arah": "SHORT",
+  "v2": "LOLOS",
+  "alasan": [],
+  "skor": 2
+ },
+ {
+  "id": "2026-11-03|Aturan Eliz|DOGE",
+  "d": "2026-11-03",
+  "aset": "DOGE",
+  "arah": "SHORT",
+  "v2": "LOLOS",
+  "alasan": [],
+  "skor": 2
  }
 ]
