@@ -14871,13 +14871,26 @@
   "keyakinan": "",
   "alasan": "sweep Monday Low lalu reclaim",
   "alert": "",
-  "hasil": "menunggu",
-  "R": "",
+  "hasil": "TP",
+  "R": 2,
   "engine": "0537067ed55fc5be",
   "fwd": 1,
   "seq": 456,
   "prev": "14982fc59876e9f76a79",
-  "h": "e9d0ed5626d236363684"
+  "h": "e9d0ed5626d236363684",
+  "tx": 1793775600000,
+  "bm": {
+   "e": 0.3682,
+   "h": "TP",
+   "R": 2,
+   "tx": 1793775600000
+  },
+  "bi": {
+   "e": 0.3682,
+   "h": "SL",
+   "R": -1,
+   "tx": 1793768400000
+  }
  },
  {
   "id": "2026-11-04|Aturan Eliz|CELO",
@@ -14940,13 +14953,26 @@
   "keyakinan": "",
   "alasan": "sweep Monday High lalu reclaim",
   "alert": "",
-  "hasil": "menunggu",
-  "R": "",
+  "hasil": "SL",
+  "R": -1,
   "engine": "0537067ed55fc5be",
   "fwd": 1,
   "seq": 459,
   "prev": "9737a3fc5b14dd2ebbbc",
-  "h": "ef40606ff98321d90bba"
+  "h": "ef40606ff98321d90bba",
+  "tx": 1793775600000,
+  "bm": {
+   "e": 7.124,
+   "h": "SL",
+   "R": -1,
+   "tx": 1793768400000
+  },
+  "bi": {
+   "e": 7.124,
+   "h": "TP",
+   "R": 2,
+   "tx": 1793782800000
+  }
  },
  {
   "id": "2026-11-04|Aturan Eliz|TAO",

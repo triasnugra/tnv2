@@ -1,25 +1,25 @@
 # Audit gerbang kualitas Mesin 2 v2
 
-Dibuat 2026-11-04T03:58:48.072Z. Biaya: 0.15% per trade pulang-pergi.
+Dibuat 2026-11-04T11:52:57.777Z. Biaya: 0.15% per trade pulang-pergi.
 
 ## A. Audit retrospektif (IN-SAMPLE, bukan bukti)
 
 > Aturan v2 dirancang setelah melihat jurnal ini, jadi angka di bawah pasti terlihat lebih baik daripada kenyataan ke depan. Hanya tiga gerbang yang bisa ditiru dari kolom tersimpan (tren searah, jarak entry, validitas); gerbang basi/BTC/batas harian butuh data candle dan tidak ikut. Sinyal sehari saling berkorelasi, jadi jumlah sinyal jauh lebih besar daripada jumlah sampel independen (hitungan minggu).
 
-Minggu independen di data ini: 4. Interval bootstrap per minggu dengan kurang dari ~12 minggu tidak bisa diandalkan; lihat Wilson dan jumlah TP/SL mentah.
+Minggu independen di data ini: 5. Interval bootstrap per minggu dengan kurang dari ~12 minggu tidak bisa diandalkan; lihat Wilson dan jumlah TP/SL mentah.
 
 | Kelompok | Sinyal | Terisi | TP/SL | Win% [CI 95% Wilson] | R/trade | CI 95% R/trade (bootstrap minggu) | Total R | MaxDD (R) |
 |---|---|---|---|---|---|---|---|---|
-| Semua sinyal v1 (setelah dedupe) | 200 | 111 | 29/66 | 31% [22%-40%] | -0.02 | [-0.33, +0.47] | -2.62 | 31.6 |
+| Semua sinyal v1 (setelah dedupe) | 200 | 112 | 29/67 | 30% [22%-40%] | -0.03 | [-0.35, +0.46] | -3.66 | 31.6 |
 | Lolos gerbang (tiruan) | 38 | 25 | 12/9 | 57% [37%-76%] | +0.67 | [+0.40, +1.28] | +16.86 | 3.3 |
-| Ditolak gerbang (tiruan) | 162 | 86 | 17/57 | 23% [15%-34%] | -0.23 | [-0.45, +0.21] | -19.48 | 33.3 |
+| Ditolak gerbang (tiruan) | 162 | 87 | 17/58 | 23% [15%-33%] | -0.24 | [-0.47, +0.18] | -20.52 | 33.3 |
 
 ### Per alasan penolakan (satu sinyal bisa punya lebih dari satu alasan)
 
 | Kelompok | Sinyal | Terisi | TP/SL | Win% [CI 95% Wilson] | R/trade | CI 95% R/trade (bootstrap minggu) | Total R | MaxDD (R) |
 |---|---|---|---|---|---|---|---|---|
 | ENTRY_TERLALU_JAUH | 119 | 44 | 11/26 | 30% [17%-46%] | -0.04 | [-0.35, +0.32] | -1.91 | 9.2 |
-| MELAWAN_TREN_TANPA_KONFLUENSI | 91 | 68 | 11/48 | 19% [11%-30%] | -0.35 | [-0.56, +0.12] | -23.54 | 32.8 |
+| MELAWAN_TREN_TANPA_KONFLUENSI | 91 | 69 | 11/49 | 18% [11%-30%] | -0.36 | [-0.57, +0.08] | -24.58 | 32.8 |
 
 Bacaan jujur: bandingkan baris "Ditolak" dengan "Lolos". Bila yang ditolak memang jauh lebih buruk, hipotesis H3/H5 masuk akal untuk diuji ke depan. Belum lebih dari itu.
 
