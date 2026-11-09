@@ -1,6 +1,6 @@
 # Audit gerbang kualitas Mesin 2 v2
 
-Dibuat 2026-11-09T01:20:48.116Z. Biaya: 0.15% per trade pulang-pergi.
+Dibuat 2026-11-09T03:44:03.156Z. Biaya: 0.15% per trade pulang-pergi.
 
 ## A. Audit retrospektif (IN-SAMPLE, bukan bukti)
 
@@ -10,8 +10,8 @@ Minggu independen di data ini: 5. Interval bootstrap per minggu dengan kurang da
 
 | Kelompok | Sinyal | Terisi | TP/SL | Win% [CI 95% Wilson] | R/trade | CI 95% R/trade (bootstrap minggu) | Total R | MaxDD (R) |
 |---|---|---|---|---|---|---|---|---|
-| Semua sinyal v1 (setelah dedupe) | 233 | 132 | 36/74 | 33% [25%-42%] | +0.03 | [-0.38, +0.49] | +3.70 | 31.6 |
-| Lolos gerbang (tiruan) | 40 | 32 | 13/12 | 52% [33%-70%] | +0.52 | [-0.13, +0.91] | +16.62 | 4.1 |
+| Semua sinyal v1 (setelah dedupe) | 233 | 133 | 36/75 | 32% [24%-42%] | +0.02 | [-0.38, +0.48] | +2.67 | 31.6 |
+| Lolos gerbang (tiruan) | 40 | 33 | 13/13 | 50% [32%-68%] | +0.47 | [-0.23, +0.91] | +15.59 | 4.1 |
 | Ditolak gerbang (tiruan) | 193 | 100 | 23/62 | 27% [19%-37%] | -0.13 | [-0.44, +0.37] | -12.92 | 33.3 |
 
 ### Per alasan penolakan (satu sinyal bisa punya lebih dari satu alasan)
@@ -25,6 +25,6 @@ Bacaan jujur: bandingkan baris "Ditolak" dengan "Lolos". Bila yang ditolak meman
 
 ## B. Audit forward (keputusan gerbang dicatat sebelum hasil ada)
 
-- Kandidat v1 yang punya keputusan gerbang: 103 (selesai 67, terisi 46 dari syarat 150; minggu 2 dari 20)
+- Kandidat v1 yang punya keputusan gerbang: 103 (selesai 68, terisi 47 dari syarat 150; minggu 2 dari 20)
 
 **TERKUNCI.** Perbandingan lolos vs ditolak disembunyikan sampai syarat evaluasi terpenuhi, supaya gerbang tidak diubah-ubah berdasarkan hasil sementara. `--peek` tersedia tetapi hasilnya TIDAK SAH.
