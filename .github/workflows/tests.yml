@@ -1,0 +1,30 @@
+name: Uji otomatis Mesin 2
+
+# Semua uji berjalan offline (server Binance palsu). Gagal = jangan deploy perubahan itu.
+on:
+  push:
+    branches: [main]
+    paths: ["**.mjs", "index.html", ".github/workflows/tests.yml"]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Mesin v1 tidak berubah (hash terkunci) dan gerbang v2
+        run: node scripts/test-gate.mjs
+      - name: Forward test (rantai hash, protokol, penilaian)
+        run: node scripts/test-forward.mjs
+      - name: Backtester dan simulasi TP/SL
+        run: node scripts/test-backtest.mjs
+      - name: Dashboard (index.html)
+        run: node scripts/test-dashboard.mjs
