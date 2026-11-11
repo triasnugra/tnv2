@@ -1,6 +1,6 @@
 # Audit gerbang kualitas Mesin 2 v2
 
-Dibuat 2026-11-11T00:49:40.713Z. Biaya: 0.15% per trade pulang-pergi.
+Dibuat 2026-11-11T07:39:31.011Z. Biaya: 0.15% per trade pulang-pergi.
 
 ## A. Audit retrospektif (IN-SAMPLE, bukan bukti)
 
@@ -25,6 +25,6 @@ Bacaan jujur: bandingkan baris "Ditolak" dengan "Lolos". Bila yang ditolak meman
 
 ## B. Audit forward (keputusan gerbang dicatat sebelum hasil ada)
 
-- Kandidat v1 yang punya keputusan gerbang: 106 (selesai 71, terisi 49 dari syarat 150; minggu 2 dari 20)
+- Kandidat v1 yang punya keputusan gerbang: 106 (selesai 72, terisi 49 dari syarat 150; minggu 2 dari 20)
 
 **TERKUNCI.** Perbandingan lolos vs ditolak disembunyikan sampai syarat evaluasi terpenuhi, supaya gerbang tidak diubah-ubah berdasarkan hasil sementara. `--peek` tersedia tetapi hasilnya TIDAK SAH.
