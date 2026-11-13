@@ -1,6 +1,6 @@
 # Audit gerbang kualitas Mesin 2 v2
 
-Dibuat 2026-11-12T20:20:31.138Z. Biaya: 0.15% per trade pulang-pergi.
+Dibuat 2026-11-13T01:24:13.811Z. Biaya: 0.15% per trade pulang-pergi.
 
 ## A. Audit retrospektif (IN-SAMPLE, bukan bukti)
 
@@ -10,21 +10,21 @@ Minggu independen di data ini: 6. Interval bootstrap per minggu dengan kurang da
 
 | Kelompok | Sinyal | Terisi | TP/SL | Win% [CI 95% Wilson] | R/trade | CI 95% R/trade (bootstrap minggu) | Total R | MaxDD (R) |
 |---|---|---|---|---|---|---|---|---|
-| Semua sinyal v1 (setelah dedupe) | 244 | 139 | 38/79 | 32% [25%-41%] | +0.02 | [-0.37, +0.52] | +2.46 | 31.6 |
-| Lolos gerbang (tiruan) | 40 | 33 | 13/13 | 50% [32%-68%] | +0.47 | [-0.23, +0.91] | +15.59 | 4.1 |
-| Ditolak gerbang (tiruan) | 204 | 106 | 25/66 | 27% [19%-37%] | -0.12 | [-0.43, +0.37] | -13.13 | 33.3 |
+| Semua sinyal v1 (setelah dedupe) | 247 | 139 | 38/79 | 32% [25%-41%] | +0.02 | [-0.37, +0.52] | +2.46 | 31.6 |
+| Lolos gerbang (tiruan) | 41 | 33 | 13/13 | 50% [32%-68%] | +0.47 | [-0.23, +0.91] | +15.59 | 4.1 |
+| Ditolak gerbang (tiruan) | 206 | 106 | 25/66 | 27% [19%-37%] | -0.12 | [-0.43, +0.37] | -13.13 | 33.3 |
 
 ### Per alasan penolakan (satu sinyal bisa punya lebih dari satu alasan)
 
 | Kelompok | Sinyal | Terisi | TP/SL | Win% [CI 95% Wilson] | R/trade | CI 95% R/trade (bootstrap minggu) | Total R | MaxDD (R) |
 |---|---|---|---|---|---|---|---|---|
-| ENTRY_TERLALU_JAUH | 158 | 62 | 19/33 | 37% [25%-50%] | +0.10 | [-0.29, +0.54] | +6.49 | 9.2 |
-| MELAWAN_TREN_TANPA_KONFLUENSI | 103 | 76 | 13/52 | 20% [12%-31%] | -0.32 | [-0.55, +0.14] | -24.13 | 32.8 |
+| ENTRY_TERLALU_JAUH | 159 | 62 | 19/33 | 37% [25%-50%] | +0.10 | [-0.29, +0.54] | +6.49 | 9.2 |
+| MELAWAN_TREN_TANPA_KONFLUENSI | 104 | 76 | 13/52 | 20% [12%-31%] | -0.32 | [-0.55, +0.14] | -24.13 | 32.8 |
 
 Bacaan jujur: bandingkan baris "Ditolak" dengan "Lolos". Bila yang ditolak memang jauh lebih buruk, hipotesis H3/H5 masuk akal untuk diuji ke depan. Belum lebih dari itu.
 
 ## B. Audit forward (keputusan gerbang dicatat sebelum hasil ada)
 
-- Kandidat v1 yang punya keputusan gerbang: 114 (selesai 76, terisi 53 dari syarat 150; minggu 3 dari 20)
+- Kandidat v1 yang punya keputusan gerbang: 116 (selesai 76, terisi 53 dari syarat 150; minggu 3 dari 20)
 
 **TERKUNCI.** Perbandingan lolos vs ditolak disembunyikan sampai syarat evaluasi terpenuhi, supaya gerbang tidak diubah-ubah berdasarkan hasil sementara. `--peek` tersedia tetapi hasilnya TIDAK SAH.
