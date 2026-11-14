@@ -20552,7 +20552,19 @@
   "seq": 580,
   "prev": "a712a310babfd8472291",
   "h": "3ec28af17e8e48f1fb89",
-  "tx": 1794488400000
+  "tx": 1794488400000,
+  "bm": {
+   "e": 0.1731,
+   "h": "SL",
+   "R": -1,
+   "tx": 1794492000000
+  },
+  "bi": {
+   "e": 0.1731,
+   "h": "TP",
+   "R": 2,
+   "tx": 1794621600000
+  }
  },
  {
   "id": "2026-11-12|Aturan Eliz|ARB",
@@ -21105,7 +21117,19 @@
   "seq": 604,
   "prev": "9e4087eaef0a2bccea1e",
   "h": "065f69d556f44fda7ad6",
-  "tx": 1794538800000
+  "tx": 1794538800000,
+  "bm": {
+   "e": 0.1745,
+   "h": "SL",
+   "R": -1,
+   "tx": 1794538800000
+  },
+  "bi": {
+   "e": 0.1745,
+   "h": "TP",
+   "R": 2,
+   "tx": 1794621600000
+  }
  },
  {
   "id": "2026-11-13|Aturan Eliz|AAVE",
@@ -21169,13 +21193,14 @@
   "keyakinan": "",
   "alasan": "Three Tap: 2 sentuhan lalu manipulasi di bawah, sweep Monday Low lalu reclaim",
   "alert": "",
-  "hasil": "menunggu",
-  "R": "",
+  "hasil": "SL",
+  "R": -1,
   "engine": "0537067ed55fc5be",
   "fwd": 1,
   "seq": 607,
   "prev": "ad3668bf585768af2f84",
-  "h": "e8a3dd504c9f51542aa7"
+  "h": "e8a3dd504c9f51542aa7",
+  "tx": 1794621600000
  },
  {
   "id": "2026-11-13|Aturan Eliz|CRCLB",
@@ -21843,5 +21868,28 @@
   "seq": 636,
   "prev": "5af90a56fcaeebe41a86",
   "h": "db2001b7cfb74f235328"
+ },
+ {
+  "id": "2026-11-14|Aturan Eliz|BERA",
+  "waktu": "2026-11-14 05:50 UTC",
+  "t": 1794635406374,
+  "due": 1795240206374,
+  "agen": "Aturan Eliz",
+  "aset": "BERA",
+  "arah": "LONG",
+  "entry": 0.1008,
+  "sl": 0.096018,
+  "tp": 0.11036,
+  "harga_awal": 0.1147,
+  "keyakinan": "",
+  "alasan": "deviasi bawah lalu recovery, sweep Monday Low lalu reclaim",
+  "alert": "",
+  "hasil": "menunggu",
+  "R": "",
+  "engine": "0537067ed55fc5be",
+  "fwd": 1,
+  "seq": 637,
+  "prev": "db2001b7cfb74f235328",
+  "h": "7447626bf62bb7bd68db"
  }
 ]

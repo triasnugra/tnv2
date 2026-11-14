@@ -4034,5 +4034,19 @@
   "v2": "LOLOS",
   "alasan": [],
   "skor": 2
+ },
+ {
+  "id": "2026-11-14|Aturan Eliz|BERA",
+  "d": "2026-11-14",
+  "aset": "BERA",
+  "arah": "LONG",
+  "v2": "TOLAK",
+  "alasan": [
+   "VOLUME_TIPIS",
+   "ENTRY_TERLALU_JAUH",
+   "SETUP_BASI_TP_SUDAH_TERSENTUH",
+   "MELAWAN_BTC"
+  ],
+  "skor": 2
  }
 ]
