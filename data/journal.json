@@ -25442,13 +25442,14 @@
   "keyakinan": "",
   "alasan": "sweep Monday High lalu reclaim, searah tren",
   "alert": "",
-  "hasil": "menunggu",
-  "R": "",
+  "hasil": "TP",
+  "R": 2,
   "engine": "0537067ed55fc5be",
   "fwd": 1,
   "seq": 707,
   "prev": "f1361140663f7873abdc",
-  "h": "e93fbf2ef89cc0fb5cf5"
+  "h": "e93fbf2ef89cc0fb5cf5",
+  "tx": 1795532400000
  },
  {
   "id": "2026-11-20|Aturan Eliz|TAO",
@@ -25868,13 +25869,26 @@
   "keyakinan": "",
   "alasan": "sweep Monday High lalu reclaim",
   "alert": "",
-  "hasil": "menunggu",
-  "R": "",
+  "hasil": "TP",
+  "R": 2,
   "engine": "0537067ed55fc5be",
   "fwd": 1,
   "seq": 721,
   "prev": "1f1c1f0674be1ab8dbf9",
-  "h": "894a416c5075c08e7561"
+  "h": "894a416c5075c08e7561",
+  "tx": 1795532400000,
+  "bm": {
+   "e": 3.055,
+   "h": "TP",
+   "R": 2,
+   "tx": 1795237200000
+  },
+  "bi": {
+   "e": 3.055,
+   "h": "SL",
+   "R": -1,
+   "tx": 1795186800000
+  }
  },
  {
   "id": "2026-11-20|Aturan Eliz|UNI",
@@ -26045,13 +26059,14 @@
   "keyakinan": "",
   "alasan": "sweep Monday High lalu reclaim, searah tren",
   "alert": "",
-  "hasil": "menunggu",
-  "R": "",
+  "hasil": "TP",
+  "R": 2,
   "engine": "cdaa11430a4b55e8",
   "fwd": 1,
   "seq": 727,
   "prev": "4900ee73d8f76412de17",
-  "h": "1980b190e9e2058544ef"
+  "h": "1980b190e9e2058544ef",
+  "tx": 1795532400000
  },
  {
   "id": "2026-11-21|Aturan Eliz|ZEC",
@@ -26317,13 +26332,26 @@
   "keyakinan": "",
   "alasan": "sweep Monday High lalu reclaim, Wolf: breakout trendline gagal",
   "alert": "",
-  "hasil": "menunggu",
-  "R": "",
+  "hasil": "TP",
+  "R": 2,
   "engine": "0537067ed55fc5be",
   "fwd": 1,
   "seq": 736,
   "prev": "607768365175ac942204",
-  "h": "5361a44469826d9212e8"
+  "h": "5361a44469826d9212e8",
+  "tx": 1795532400000,
+  "bm": {
+   "e": 2.786,
+   "h": "SL",
+   "R": -1,
+   "tx": 1795345200000
+  },
+  "bi": {
+   "e": 2.786,
+   "h": "SL",
+   "R": -1,
+   "tx": 1795237200000
+  }
  },
  {
   "id": "2026-11-21|Aturan Eliz|BNB",
@@ -26432,13 +26460,14 @@
   "keyakinan": "",
   "alasan": "sweep Monday High lalu reclaim, searah tren",
   "alert": "",
-  "hasil": "menunggu",
-  "R": "",
+  "hasil": "TP",
+  "R": 2,
   "engine": "0537067ed55fc5be",
   "fwd": 1,
   "seq": 741,
   "prev": "e03da4960451133a3cd1",
-  "h": "3710f42ec9cbd763d240"
+  "h": "3710f42ec9cbd763d240",
+  "tx": 1795532400000
  },
  {
   "id": "2026-11-21|Aturan Eliz|ADA",
