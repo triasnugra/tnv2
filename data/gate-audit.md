@@ -1,6 +1,6 @@
 # Audit gerbang kualitas Mesin 2 v2
 
-Dibuat 2026-11-25T09:00:38.700Z. Biaya: 0.15% per trade pulang-pergi.
+Dibuat 2026-11-25T19:09:35.830Z. Biaya: 0.15% per trade pulang-pergi.
 
 ## A. Audit retrospektif (IN-SAMPLE, bukan bukti)
 
