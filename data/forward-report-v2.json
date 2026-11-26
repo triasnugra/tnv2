@@ -1,9 +1,9 @@
 {
- "dibuat": "2026-11-25T19:09:35.775Z",
+ "dibuat": "2026-11-26T02:24:22.114Z",
  "chain": {
   "ok": true,
-  "n": 780,
-  "head": "517e92ee0bbf4e945092",
+  "n": 812,
+  "head": "6bba5077edc471d0c8bd",
   "errors": []
  },
  "protocol": {
